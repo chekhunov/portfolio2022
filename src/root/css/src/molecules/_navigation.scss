@@ -1,0 +1,30 @@
+.menu {
+  font-size: 14px;
+  text-transform: uppercase;
+  &__item {
+    position: relative;
+    color: #4D333E;
+    &:before {
+        position: absolute;
+        content: "";
+        left: 0;
+        right: 0;
+        bottom: -4px;
+        height: 5px;
+        width: 5px;
+        margin: 0 auto;
+        border-radius: 50%;
+        background-color: #F6F6F6;
+        transition: background-color 0.3s;
+      }
+    &.active {
+      &:before {
+        background-color: #D06156;
+      }
+    }
+
+    &:not(:last-child) {
+      margin-right: 20px;
+    }
+  }
+}

@@ -1,0 +1,11 @@
+.logo {
+  position: relative;
+  font-size: 24px;
+  font-weight: 500;
+  color: #D06156;
+  @extend %oswald-500;
+  &__right {
+    position: absolute;
+    bottom: -5px;
+  }
+}

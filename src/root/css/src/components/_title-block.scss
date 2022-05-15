@@ -1,0 +1,17 @@
+.title-block {
+  position: relative;
+  &__text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    max-width: 154px;
+    padding-left: 20px;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 20px;
+    color: #4d333e;
+    text-align: start;
+    transform: translate(-50%, -50%);
+    @extend %syncopate-700;
+  }
+}
