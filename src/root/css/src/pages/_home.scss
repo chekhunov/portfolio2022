@@ -1,5 +1,5 @@
 .home {
-  padding: 30px 0 50px;
+  padding: 50px 0 100px;
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -7,7 +7,7 @@
   &__inner {
     position: relative;
     padding-top: 80px;
-    margin-bottom: 80px;
+    margin-bottom: 100px;
   }
 
   &__left {
@@ -71,5 +71,61 @@
     right: -30px;
     padding-top: 40px;
     z-index: 1;
+  }
+}
+
+.description {
+  position: relative;
+  padding-top: 80px;
+  margin-bottom: 400px;
+
+  &::after {
+    position: absolute;
+    content: "";
+    right: 0;
+    bottom: -60px;
+    height: 320px;
+    width: 0;
+    background:linear-gradient(to left, #4d333e 100%, #F6F6F6 20%);  
+    z-index: 0;
+    transition: width 0.5s;
+  }
+
+  &:hover {
+    &::after {
+      width: 1050px;
+    }
+  }
+
+  &__headline {
+    width: 100%;
+    max-width: 630px;
+    margin-left: auto;
+    font-size: 48px;
+    color: #4d333e;
+    line-height: 1;
+    @extend %syncopate-700;
+  }
+
+  &__content {
+    position: relative;
+    display: flex;
+    max-width: 600px;
+    margin-left: -30px;
+    padding-top: 100px;
+    font-size: 48px;
+    line-height: 50px;
+    text-transform: lowercase;
+    color:white;
+    mix-blend-mode:difference;
+    z-index: 1;
+    @extend %syncopate-700;
+    
+  }
+
+
+  &__text-l {
+    height: 195px;
+    line-height: 50px;
   }
 }
