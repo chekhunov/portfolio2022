@@ -4,7 +4,10 @@
 
 .title {
   padding-bottom: 40px;
-  font-size: 24px;
+  font-size: 48px;
   color: $title;
   text-align: center;
+  text-transform: uppercase;
+  text-shadow: 2px 1px 0px white, 3px 2px 0px red;
+  @extend %vegan-400;
 }

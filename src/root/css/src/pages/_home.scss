@@ -77,7 +77,7 @@
 .description {
   position: relative;
   padding-top: 80px;
-  margin-bottom: 400px;
+  margin-bottom: 200px;
 
   &::after {
     position: absolute;
@@ -123,9 +123,119 @@
     
   }
 
-
   &__text-l {
     height: 195px;
     line-height: 50px;
+  }
+}
+
+
+.skills {
+  margin-bottom: 150px;
+  padding: 0 50px;
+
+  &__inner {
+    position: relative;
+    padding: 80px 110px;
+  }
+
+  &__title {
+    position: absolute;
+    top: 0;
+    left: -30px;
+  }
+}
+
+.column {
+  &__title {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #D06156;
+    @extend %vegan-400;
+  }
+
+  &__item {
+    margin-bottom: 5px;
+    font-size: 18px;
+    color: $default;
+    @extend %montserrat-400;
+
+    &::first-letter {
+      font-size: 150%;
+      color: #8A2BE2;
+    }
+  }
+}
+
+.about {
+  margin-bottom: 150px;
+
+  &__img {
+    width: calc(40% - 60px);
+  }
+
+  &__content {
+    width: calc(60%);
+  }
+
+  &__text {
+    font-size: 18px;
+    @extend %montserrat-400;
+  }
+}
+
+.process {
+  margin-bottom: 150px;
+
+  &__inner {
+    align-items: flex-start;
+  }
+
+  &__content {
+    width: 100%;
+  }
+
+  &__item {
+    width: calc(16%);
+    text-align: center;
+  }
+
+  &__img {
+    position: relative;
+    margin-bottom: 35px;
+    display: flex;
+    align-items: center;
+  }
+
+  .line {
+      position: absolute;
+      content: "";
+      display: block;
+      height: 2px;
+      width: 48px;
+      right: -46px;
+      background-color: #000;
+  }
+
+  &__num {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 64px;
+    line-height: 70px;
+    text-transform: uppercase;
+    color: #4D333E;
+    transform: translate(-50%, -50%);
+    @extend %vegan-400;
+
+    &.red {
+      color: #D06156;
+    }
+  }
+
+  &__description {
+    font-size: 18px;
+    color: #000;
+    @extend %vegan-400;
   }
 }
