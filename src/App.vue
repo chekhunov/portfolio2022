@@ -1,15 +1,16 @@
 <template>
   <div class="body">
-    <Header />
+    <Header @locale="getLang" />
 
     <div class="main">
+      <!-- <div class="home__left">{{ t("ihor") }}</div> -->
       <div class="container"></div>
 
       <!-- <PreLoader
         v-if="$store.state.preLoader.isShow"
       /> -->
 
-      <transition name="moveInUp">
+      <transition appear name="moveInUp" mode="in-out">
         <router-view />
       </transition>
     </div>
@@ -31,7 +32,14 @@ export default {
     PreLoader,
   },
   data() {
-    return {};
+    return {
+      locale: "en",
+    };
+  },
+  methods: {
+    getLang(event) {
+      this.locale = event;
+    },
   },
 };
 </script>

@@ -2,3 +2,80 @@
   padding: 15px 0;
   border-bottom: 1px solid rgb(240, 240, 240);
 }
+
+#controls {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.audio-track {
+  width: 150px;
+  height: 3px;
+  background-color: #dddddd;
+  margin: 5px 0;
+}
+
+.time {
+  width: 0;
+  height: 3px;
+  background-color: red;
+}
+
+.player {
+  display: flex;
+  align-items: center;
+  &__left,
+  &__right {
+    display: block;
+  }
+
+  &__play,
+  &__pause,
+  &__left,
+  &__right {
+    width: 40px;
+    height: 40px;
+    transition: filter 0.3s;
+    cursor: pointer;
+
+    &:hover {
+      filter: brightness(5);
+    }
+
+    &.active {
+      filter: brightness(5);
+    }
+  }
+}
+
+.lang {
+  z-index: 0;
+  &__item {
+    position: relative;
+    color: $title;
+    cursor: pointer;
+    transition: color 0.3s;
+    &:hover {
+      color: $accent;
+      transition: color 0.3s;
+    }
+    &:first-child {
+      margin-right: 10px;
+    }
+    &:first-child::after {
+      position: absolute;
+      content: "/";
+      top: 0;
+      padding: 0;
+      display: inline-block;
+      color: $title;
+    }
+    &:last-child {
+      padding-left: 0;
+    }
+    &.active {
+      color: $color;
+    }
+  }
+}

@@ -25,6 +25,30 @@
             </router-link>
           </div>
         </div>
+
+        <nav class="menu d-flex">
+          <div class="lang mr-10">
+            <span
+              id="en"
+              class="lang__item en"
+              :class="{ active: lang === 'en' }"
+              @click="setLocale('en')"
+              ><flag iso="us"></flag> en &nbsp;</span
+            >
+            <span
+              id="ru"
+              class="lang__item ru"
+              :class="{ active: lang === 'ru' }"
+              @click="setLocale('ru')"
+              ><flag iso="ru"></flag> ru</span
+            >
+          </div>
+
+          <button class="menu__btn">
+            <span></span>
+          </button>
+          <span class="menu__bg"></span>
+        </nav>
       </div>
     </div>
   </div>
@@ -33,7 +57,14 @@
 <script>
 export default {
   name: "Header",
+  props: {
+    value: {
+      type: String,
+      default: "en",
+    },
+  },
   data() {
+    const lang = localStorage.getItem("lang") || "en";
     return {
       links: [
         {
@@ -61,6 +92,7 @@ export default {
           isActive: false,
         },
       ],
+      lang: lang,
     };
   },
   methods: {
@@ -68,6 +100,14 @@ export default {
       this.links.map((item, index) =>
         index === idx ? (item.isActive = true) : (item.isActive = false)
       );
+    },
+    setLocale(lang) {
+      if (lang) {
+        localStorage.setItem("lang", lang);
+        window.location.reload();
+        this.lang = lang;
+        this.$emit("locale", lang);
+      }
     },
   },
 };

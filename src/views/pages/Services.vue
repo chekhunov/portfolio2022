@@ -1,7 +1,11 @@
 <template>
-  <div>
-    {{ "Services" }}
-  </div>
+  <section class="services">
+    <div class="container">
+      <div>
+        {{ "Services" }}
+      </div>
+    </div>
+  </section>
 </template>
 
 <script>

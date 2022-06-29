@@ -1,4 +1,27 @@
 .footer {
-  padding: 20px 0;
-  background-color: rgb(29, 148, 216)
+  &__top {
+    padding: 40px 0 20px;
+    background-color: #fff;
+  }
+
+  &__bottom {
+    padding: 20px 0 40px;
+    background-color: #4D333E;
+    a {
+      color: #fff;
+      &:hover {
+        color: darken($color: #fff, $amount: 30%)
+      }
+    }
+  }
+}
+
+.top {
+  &__link {
+    font-size: 18px;
+    color: #4D333E;
+    &:hover {
+        color: darken($color: #fff, $amount: 40%)
+      }
+  }
 }
