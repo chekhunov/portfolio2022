@@ -58,12 +58,12 @@
     <section class="home">
       <div class="container">
         <div class="home__inner d-flex justify-center align-center">
-          <!-- <div class="home__left">{{ $t("ihor") }}</div> -->
+          <div class="home__left">{{ t("ihor") }}</div>
 
           <div class="home__content">
             <img
               class="home__img"
-              src="../../root/assets/img/home1.png"
+              src="@/root/assets/img/home1.png"
               alt="photo"
             />
 
@@ -106,7 +106,7 @@
     <section class="skills">
       <div class="container">
         <div class="skills__inner" style="background-color: white">
-          <div class="title skills__title">Skills</div>
+          <div class="title skills__title">{{ t("skills") }}</div>
 
           <div class="skills__content d-flex justify-between">
             <ul
@@ -132,25 +132,21 @@
     <section class="about">
       <div class="container">
         <div class="about__inner d-flex justify-between">
-          <img class="about__img" src="../../root/assets/img/my.jpg" alt="ic" />
+          <img class="about__img" src="@/root/assets/img/my.jpg" alt="ic" />
 
           <div class="about__content">
             <div class="about__block d-flex justify-between align-center">
-              <div class="title">About me</div>
+              <div class="title">{{ t("about") }}</div>
 
-              <TitleBlock />
+              <div class="about__title-block">
+                <TitleBlock />
+              </div>
             </div>
 
-            <p class="about__text">Hey!</p>
+            <p class="about__text">{{ t("hey") }}</p>
 
             <p class="about__text">
-              My name is Igor, I am 40 years old, I have been programming for 3
-              years, of which 1 year I studied Java, 2 years I have been doing
-              Frontend development in the field of marketplaces using React and
-              Vue technologies, also developing layouts in Figma. In my free
-              time, I study new technologies and new approaches in development,
-              and also help beginners to form in the profession of a Frontend
-              developer.
+              {{ t("my_name") }}
             </p>
           </div>
         </div>
@@ -160,7 +156,7 @@
     <section class="process">
       <div class="container">
         <div class="process__inner d-flex flex-column">
-          <div class="title">The process</div>
+          <div class="title">{{ t("process") }}</div>
 
           <div class="process__content d-flex justify-between">
             <div
@@ -190,16 +186,16 @@
 
     <section class="projects">
       <div class="container">
-        <div class="title d-flex">Projects</div>
+        <div class="title d-flex">{{ t("projects") }}</div>
       </div>
 
-      <ProjectsSwiper :projectItems="project_items" />
+      <ProjectsSwiper :projectItems="projects" />
     </section>
 
     <section class="experience">
       <div class="container">
         <div class="experience__inner" style="background-color: white">
-          <div class="title skills__title">work experience</div>
+          <div class="title skills__title">{{ t("work_experience") }}</div>
 
           <div class="experience__content d-flex flex-column">
             <div
@@ -230,7 +226,7 @@
       <div class="container">
         <div class="achievement__inner">
           <div class="title achievement__title d-flex">
-            Achievement
+            {{ t("achievement") }}
             <svg
               width="147"
               height="58"
@@ -247,7 +243,10 @@
         </div>
       </div>
 
-      <SertifSlider :slider_sertif_items="slider_sertif_items" />
+      <SertifSlider
+        :slider_sertif_items="slider_sertif_items"
+        class="achievement__swiper"
+      />
     </section>
 
     <section class="contact">
@@ -258,48 +257,57 @@
             :key="`item_${index}`"
             :style="index === 0 ? '-webkit-text-fill-color: #D06156;' : ''"
           >
-            Just say hello
+            {{ t("just") }}
           </span>
         </div>
 
         <div class="contact__content d-flex justify-between align-center">
           <div class="contact__left">
             <form class="contact__form form">
-              <label for="" class="form__row d-flex flex-column mb-20">
-                <span>How can i call you?</span>
+              <label class="form__row d-flex flex-column mb-20">
+                <span>{{ t("how_can") }}</span>
+
                 <input
+                  v-model="send_mail.name"
                   type="name"
                   class="form__input"
-                  placeholder="Your name"
+                  :placeholder="t('name')"
                 />
               </label>
 
-              <label for="" class="form__row d-flex flex-column mb-20">
-                <span>How can i contact you?</span>
+              <label class="form__row d-flex flex-column mb-20">
+                <span>{{ t("how_can_contact") }}</span>
                 <input
+                v-model="send_mail.mail"
                   type="mail"
                   class="form__input"
-                  placeholder="Your e-mail"
+                  :placeholder="t('e-mail')"
                 />
               </label>
 
-              <label for="" class="form__row d-flex flex-column mb-20">
-                <span>What’s the name of your company?</span>
+              <label class="form__row d-flex flex-column mb-20">
+                <span>{{ t("what_name") }}</span>
                 <input
+                  v-model="send_mail.company"
                   type="text"
                   class="form__input"
-                  placeholder="Your company name"
+                  :placeholder="t('company')"
                 />
               </label>
 
-              <label for="" class="form__row d-flex flex-column">
-                <span>How can i help you?</span>
+              <label class="form__row d-flex flex-column mb-20">
+                <span>{{ t("how_help") }}</span>
                 <textarea
+                  v-model="send_mail.text"
                   type="text"
                   class="form__input"
-                  placeholder="Tell me about your project "
+                  :placeholder="t('tell_me')"
                 ></textarea>
               </label>
+
+              <button class="btn" @click="onSubmit">
+                <span class="btn__text">{{ t("send") }}</span>
+              </button>
             </form>
           </div>
 
@@ -313,9 +321,10 @@
 </template>
 
 <script>
-import TitleBlock from "../components/base/TitleBlock.vue";
-import ProjectsSwiper from "../components/organisms/ProjectsSwiper.vue";
-import SertifSlider from "../components/organisms/SertifSlider.vue";
+import { useI18n } from "vue-i18n";
+import TitleBlock from "@/views/components/base/TitleBlock.vue";
+import ProjectsSwiper from "@/views/components/organisms/ProjectsSwiper.vue";
+import SertifSlider from "@/views/components/organisms/SertifSlider.vue";
 
 export default {
   name: "Home",
@@ -354,61 +363,64 @@ export default {
       process_items: [
         {
           number: "01",
-          description: "Workin with the layout",
+          description: this.t("workin"),
           isActive: false,
         },
         {
           number: "02",
-          description: "Content layout",
+          description: this.t("content"),
           isActive: false,
         },
         {
           number: "03",
-          description: "Website styling",
+          description: this.t("website"),
           isActive: true,
         },
         {
           number: "04",
-          description: "Adaptive layout",
+          description: this.t("adaptive"),
           isActive: false,
         },
         {
           number: "05",
-          description: "Cross-browser compatibility and PixelPerfect",
+          description: this.t("cross"),
           isActive: false,
         },
         {
           number: "06",
-          description: "Eliminating errors",
+          description: this.t("eliminating"),
           isActive: true,
         },
       ],
       projects: [
         {
           id: "01",
-          name: "Digital marketing agency",
+          name: this.t("marketing"),
           imgUrl: "/public/img/projects/marketing.jpg",
           bgColor: "#4D333E",
           color: "#fff",
           link: "http://google.com",
+          gitLink: "http://google.com",
           stroke: "white",
         },
         {
           id: "02",
-          name: "WAWE - Surf school",
+          name: this.t("wawe"),
           imgUrl: "/public/img/projects/wawe.jpg",
           bgColor: "",
           color: "burlywood",
           link: "http://google.com",
+          gitLink: "http://google.com",
           stroke: "white",
         },
         {
           id: "03",
-          name: "Smart and trendy",
+          name: this.t("glee"),
           imgUrl: "/public/img/projects/glee.jpg",
           bgColor: "#ffffff",
           color: "darkcyan",
           link: "http://google.com",
+          gitLink: "http://google.com",
           stroke: "black",
         },
       ],
@@ -442,62 +454,65 @@ export default {
             "JavaScript · HTML · CSS · Adaptive layout · JQuery · Gulp · OpenCart · WordPress · БЭМ · Sass · Cross-browser layout",
         },
       ],
-      project_items: [
-        {
-          id: "01",
-          name: "Digital marketing agency",
-          img: "1",
-          bgColor: "#4D333E",
-          color: "#fff",
-          link: "http://google.com",
-          stroke: "white",
-        },
-        {
-          id: "02",
-          name: "WAWE - Surf school",
-          img: "2",
-          bgColor: "",
-          color: "burlywood",
-          link: "http://google.com",
-          stroke: "white",
-        },
-        {
-          id: "03",
-          name: "Smart and trendy",
-          img: "3",
-          bgColor: "#ffffff",
-          color: "darkcyan",
-          link: "http://google.com",
-          stroke: "black",
-        },
-        {
-          id: "04",
-          name: "a",
-          img: "4",
-          bgColor: "#ffffff",
-          color: "darkcyan",
-          link: "http://google.com",
-          stroke: "black",
-        },
-        {
-          id: "05",
-          name: "a",
-          img: "5",
-          bgColor: "#ffffff",
-          color: "darkcyan",
-          link: "http://google.com",
-          stroke: "black",
-        },
-        {
-          id: "06",
-          name: "a",
-          img: "6",
-          bgColor: "#ffffff",
-          color: "darkcyan",
-          link: "http://google.com",
-          stroke: "black",
-        },
-      ],
+      // project_items: [
+      //   {
+      //     id: "01",
+      //     name: "Digital marketing agency",
+      //     img: "1",
+      //     bgColor: "#4D333E",
+      //     color: "#fff",
+      //     link: "http://google.com",
+      //     stroke: "white",
+      //   },
+      //   {
+      //     id: "02",
+      //     name: "WAWE - Surf school",
+      //     img: "2",
+      //     bgColor: "",
+      //     color: "burlywood",
+      //     link: "http://google.com",
+      //     stroke: "white",
+      //   },
+      //   {
+      //     id: "03",
+      //     name: "Smart and trendy",
+      //     img: "3",
+      //     bgColor: "#ffffff",
+      //     color: "darkcyan",
+      //     link: "http://google.com",
+      //     stroke: "black",
+      //   },
+      //   {
+      //     id: "04",
+      //     name: "a",
+      //     img: "4",
+      //     bgColor: "#ffffff",
+      //     color: "darkcyan",
+      //     link: "http://google.com",
+      //     gitLink: "http://google.com",
+      //     stroke: "black",
+      //   },
+      //   {
+      //     id: "05",
+      //     name: "a",
+      //     img: "5",
+      //     bgColor: "#ffffff",
+      //     color: "darkcyan",
+      //     link: "http://google.com",
+      //     gitLink: "http://google.com",
+      //     stroke: "black",
+      //   },
+      //   {
+      //     id: "06",
+      //     name: "a",
+      //     img: "6",
+      //     bgColor: "#ffffff",
+      //     color: "darkcyan",
+      //     link: "http://google.com",
+      //     gitLink: "http://google.com",
+      //     stroke: "black",
+      //   },
+      // ],
       audio: {
         id: "muscle-car",
         name: "Muscle Car",
@@ -533,9 +548,19 @@ export default {
         },
       ],
       interval: 3000,
+      send_mail: {
+        name: '',
+        mail: '',
+        company: '',
+        text: ''
+      },
     };
   },
   components: { TitleBlock, ProjectsSwiper, SertifSlider },
+  setup() {
+    const { t } = useI18n();
+    return { t };
+  },
   methods: {
     play(audio) {
       audio.isPlaying = true;
@@ -562,9 +587,14 @@ export default {
     if (this.interval > 0) {
       let vm = this;
       setInterval(function () {
-        vm.nextSlide();
+        vm.nextSlide;
       }, vm.interval);
     }
+  },
+  methods: {
+    onSubmit() {
+      console.log(this.send_mail.company);
+    },
   },
 };
 </script>

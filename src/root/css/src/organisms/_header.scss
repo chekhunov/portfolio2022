@@ -1,6 +1,51 @@
 .header {
   padding: 15px 0;
   border-bottom: 1px solid rgb(240, 240, 240);
+
+  &__popup-btn {
+    display: none;
+    padding: 10px;
+    position: relative;
+    border: none;
+    background-color: transparent;
+    transform: translateY(0px);
+
+    @include _767 {
+      display: inline-block;
+    }
+
+    &::after {
+      position: absolute;
+      content: '';
+      margin: auto;
+      width: 20px;
+      height: 1px;
+      top: 12px;
+      right: 2px;
+      background-color: #4d333e;
+      transition: transform 0.3s;
+    }
+    &::before {
+      position: absolute;
+      content: '';
+      margin: auto;
+      width: 20px;
+      height: 1px;
+      top: 6px;
+      right: 2px;
+      background-color: #4d333e;
+      transition: transform 0.3s;
+    }
+
+  }
+  &__popup-btn.active {
+    &::before {
+      transform: rotate(45deg) translateY(4px);
+    }
+    &::after {
+      transform: rotate(-45deg) translateY(-4px);
+    }
+  }
 }
 
 #controls {
@@ -50,6 +95,8 @@
 }
 
 .lang {
+  font-size: 14px;
+  text-transform: uppercase;
   z-index: 0;
   &__item {
     position: relative;

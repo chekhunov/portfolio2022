@@ -3,7 +3,6 @@
     <Header @locale="getLang" />
 
     <div class="main">
-      <!-- <div class="home__left">{{ t("ihor") }}</div> -->
       <div class="container"></div>
 
       <!-- <PreLoader
@@ -23,6 +22,7 @@
 import Header from "./views/components/organisms/Header.vue";
 import Footer from "./views/components/organisms/Footer.vue";
 import PreLoader from "./views/components/base/PreLoader.vue";
+// import { useStore } from "vuex";
 
 export default {
   name: "Home",

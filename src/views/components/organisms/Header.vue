@@ -5,14 +5,14 @@
         <div class="header__logo">
           <router-link to="/">
             <span class="logo">
-              <span class="logo__left">I</span>
-              <span class="logo__right">C</span>
+              <span class="logo__left">{{ t("I") }}</span>
+              <span class="logo__right">{{ t("C") }}</span>
             </span>
           </router-link>
         </div>
 
         <div class="main__top d-flex justify-between align-center">
-          <div id="nav" class="nav menu">
+          <div id="nav" class="nav menu" :class="{ active: burgerMenu }">
             <router-link
               :to="link.route"
               v-for="(link, index) in links"
@@ -21,30 +21,34 @@
               :class="{ active: link.isActive }"
               @click="activate(index)"
             >
-              {{ link.name }}
+              {{ t(`${link.name}`) }}
             </router-link>
           </div>
         </div>
 
-        <nav class="menu d-flex">
-          <div class="lang mr-10">
+        <nav class="d-flex align-center">
+          <div class="lang mr-20">
             <span
               id="en"
               class="lang__item en"
               :class="{ active: lang === 'en' }"
               @click="setLocale('en')"
-              ><flag iso="us"></flag> en &nbsp;</span
+              ><flag iso="us"></flag> {{ t("en") }} &nbsp;</span
             >
             <span
               id="ru"
               class="lang__item ru"
               :class="{ active: lang === 'ru' }"
               @click="setLocale('ru')"
-              ><flag iso="ru"></flag> ru</span
+              ><flag iso="ru"></flag> {{ t("ru") }}</span
             >
           </div>
 
-          <button class="menu__btn">
+          <button
+            class="header__popup-btn"
+            :class="{ active: burgerMenu }"
+            @click="() => (burgerMenu = !burgerMenu)"
+          >
             <span></span>
           </button>
           <span class="menu__bg"></span>
@@ -55,6 +59,8 @@
 </template>
 
 <script>
+import { useI18n } from "vue-i18n";
+
 export default {
   name: "Header",
   props: {
@@ -66,34 +72,39 @@ export default {
   data() {
     const lang = localStorage.getItem("lang") || "en";
     return {
+      burgerMenu: false,
       links: [
         {
           id: 0,
           route: "/",
-          name: "Home",
+          name: "home",
           isActive: true,
         },
         {
           id: 1,
           route: "/services",
-          name: "Services",
+          name: "services",
           isActive: false,
         },
         {
           id: 2,
           route: "/portfolio",
-          name: "Portfolio",
+          name: "portfolio",
           isActive: false,
         },
         {
           id: 3,
           route: "/contacts",
-          name: "Contacts",
+          name: "contacts",
           isActive: false,
         },
       ],
       lang: lang,
     };
+  },
+  setup() {
+    const { t } = useI18n();
+    return { t };
   },
   methods: {
     activate(idx) {

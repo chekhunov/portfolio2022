@@ -2,13 +2,25 @@
   &__top {
     padding: 40px 0 20px;
     background-color: #fff;
+
+    @include _640 {
+      padding: 20px 0 20px;
+    }
   }
 
   &__bottom {
     padding: 20px 0 40px;
     background-color: #4D333E;
+
+    @include _640 {
+      padding: 20px 0 20px;
+    }
     a {
       color: #fff;
+
+      @include _640 {
+        font-size: 14px;
+      }
       &:hover {
         color: darken($color: #fff, $amount: 30%)
       }
@@ -17,6 +29,18 @@
 }
 
 .top {
+  &__inner {
+    @include _640 {
+      flex-direction: column;
+    }
+  }
+
+  &__left {
+    @include _640 {
+      margin-bottom: 20px;
+    }
+  }
+
   &__link {
     font-size: 18px;
     color: #4D333E;
